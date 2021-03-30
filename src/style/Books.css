@@ -1,0 +1,33 @@
+.home-page{
+    background-color: #2F4F4F;
+    color: white;
+    min-height: 100vh;
+    margin-top: -20px;
+
+}
+
+.home-h2{
+    padding-top: 10%;
+}
+
+.tableAnimals {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+ .table-div{
+     width: 70%;
+     margin-top: 30px;
+     margin-left: 10px;
+ }
