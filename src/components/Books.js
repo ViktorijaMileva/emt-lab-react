@@ -40,7 +40,7 @@ class Books extends React.Component {
                 <td>{book.author.name}</td>
                 <td>{book.availableCopies}</td>
                 <td>
-                    <Link to="/books/${props.book.id}">Edit Book</Link>
+                    <Link to="/books/${book.id}">Edit Book</Link>
                 </td>
             </tr>)}
 
