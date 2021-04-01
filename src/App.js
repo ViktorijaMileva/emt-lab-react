@@ -11,7 +11,8 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      books: []
+      books: [],
+      selectedBook: {}
     }
   }
 
@@ -35,8 +36,24 @@ class App extends React.Component {
     });
   }
 
+  getBook = (id) => {
+    BookService.getBook(id)
+    .then((data) => {
+        this.setState({
+          selectedBook: data.data
+        })
+      })
+  }
+
   editBook = (id, name, category, authorId, availableCopies) => {
     BookService.editBook(id, name, category, authorId, availableCopies)
+    .then(() => {
+      this.loadBooks();
+    });
+  }
+
+  deleteBook = (id) => {
+    BookService.deleteBook(id)
     .then(() => {
       this.loadBooks();
     });
@@ -47,15 +64,18 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <Route path={"/books"} exact render={() => 
-            <Books books={this.state.books}/>}
+            <Books books={this.state.books} 
+            onEditBook={this.getBook} 
+            onDeleteBook={this.deleteBook}
+            />}
             />
 
             <Route path={"/books/add"} exact render={() =>
             <AddBook onAddBook={this.addBook} />}
             />
 
-            <Route path={"/books/:id"} exact render={() =>
-            <EditBook onEditBook={this.editBook} />} />
+            <Route path={"/books/edit/:id"} exact render={() =>
+            <EditBook onEditBook={this.editBook} book={this.state.selectedBook} />} />
         </Router>
       </div>
     );

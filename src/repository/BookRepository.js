@@ -16,12 +16,20 @@ const BookService = {
     },
 
     editBook: (id, name, category, authorId, availableCopies) => {
-        return axios.put(`/books/${id}`,{
+        return axios.put(`/books/edit/${id}` ,{
         "name" : name,
         "category" : category,
         "author" : authorId,
         "availableCopies" : availableCopies
         });
+    },
+
+    getBook: (id) => {
+        return axios.get(`/books/${id}`);
+    },
+
+    deleteBook: (id) => {
+        return axios.delete(`/books/delete/${id}`)
     }
 }
 export default BookService;
