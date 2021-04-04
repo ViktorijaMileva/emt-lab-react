@@ -29,7 +29,11 @@ const BookService = {
     },
 
     deleteBook: (id) => {
-        return axios.delete(`/books/delete/${id}`)
+        return axios.delete(`/books/delete/${id}`);
+    },
+
+    getAuthors: () => {
+        return axios.get("/books/authors");
     }
 }
 export default BookService;

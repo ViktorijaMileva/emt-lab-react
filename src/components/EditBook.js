@@ -23,6 +23,7 @@ const EditBook = (props) => {
     }
 
     const handleChange = (e) => {
+        console.log(e.target.value);
         updateFormData({
             ...formData,
             [e.target.name]: e.target.value.trim()
@@ -52,7 +53,7 @@ const EditBook = (props) => {
 
                 <label for="category">Book Category</label>
                 <select name="category" id="category" onChange={handleChange}>
-                    <option value={props.book.category} disabled hidden selected>{props.book.category}</option>
+                    <option value={props.book.category} disabled selected>{props.book.category}</option>
                     {
                         Object.keys(Categories).map((key) => {
                             return <option value={key}>{key}</option>
@@ -61,9 +62,13 @@ const EditBook = (props) => {
                 </select>
 
                 <label for="authorId">Book Author</label>
-                <input id="authorId" 
-                name="authorId" 
-                onChange={handleChange}/>
+                <select name="authorId" id="authorId" onChange={handleChange}>
+                    {
+                        props.authors.map((author) => {
+                            return <option value={author.id}>{author.name}</option>
+                        })
+                    }
+                </select>
 
                 <label for="availableCopies">Book Available Copies</label>
                 <input id="availableCopies" 

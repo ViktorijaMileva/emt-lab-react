@@ -47,7 +47,7 @@ class Books extends React.Component {
                 <td>{book.author.name}</td>
                 <td>{book.availableCopies}</td>
                 <td>
-                    <Link className="editLink" onClick={() => this.props.onEditBook(book.id)}
+                    <Link className="editLink" onClick={() => {this.props.onEditBook(book.id); this.props.onGetAuthors()}}
                       to={`/books/edit/${book.id}`} >Edit Book</Link>
                 </td>
                 <td>
@@ -60,7 +60,7 @@ class Books extends React.Component {
             }
 
 
-            <Link className="addBookLink" to="/books/add">Add Book</Link>
+            <Link className="addBookLink" to="/books/add" onClick={() => this.props.onGetAuthors()}>Add Book</Link>
 
             <ReactPaginate previousLabel={"back"}
             nextLabel={"next"}

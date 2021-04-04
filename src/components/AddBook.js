@@ -59,7 +59,14 @@ const AddBook = (props) => {
                 </select>
 
                 <label for="authorId">Book Author</label>
-                <input type="text" id="authorId" name="authorId" onChange={handleChange}/>
+                <select name="author" id="authorId" onChange={handleChange}>
+                    {
+                        props.authors.map((author) => {
+                            return <option value={author.id}>{author.name}</option>
+                        })
+                    }
+                </select>
+
                 <label for="availableCopies">Book Available Copies</label>
                 <input type="text" id="availableCopies" name="availableCopies" onChange={handleChange}/>
 

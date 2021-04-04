@@ -8,6 +8,15 @@ input{
   border-radius: 4px;
   box-sizing: border-box;
 }
+select{
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
 label{
     flex: 1;
@@ -30,4 +39,9 @@ button{
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+button:hover{
+  background-color: green;
+  color: white;
 }
