@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import '../style/EditBook.css';
 
 const EditBook = (props) => {
     const history = useHistory();
-    const [formData, updateFormData] = React.useState({
-        name: "Book1",
-        category: "DRAMA",
-        authorId: "1",
-        availableCopies: "5"
-    })
+    let initialState = {
+        name: "",
+        category: "",
+        authorId: 0,
+        availableCopies: 0
+    }
+    const [formData, updateFormData] = React.useState(initialState)
+
+    const Categories = {
+        THRILLER: "THRILLER",
+        DRAMA: "DRAMA",
+        NOVEL: "NOVEL", 
+        HISTORY: "HISTORY", 
+        FANTASY: "FANTASY", 
+        BIOGRAPHY: "BIOGRAPHY", 
+        CLASSICS: "CLASSICS"
+    }
 
     const handleChange = (e) => {
         updateFormData({
@@ -21,15 +33,17 @@ const EditBook = (props) => {
         e.preventDefault();
         const name = formData.name !== "" ? formData.name : props.book.name;
         const category = formData.category !== "" ? formData.category : props.book.category;
-        const authorId = formData.authorId !== 0 ? formData.authorId : props.book.authorId;
+        const authorId = formData.authorId !== 0 ? formData.authorId : props.book.author.id;
         const availableCopies = formData.availableCopies !== 0 ? formData.availableCopies : props.book.availableCopies;
 
+        console.log(name, category, authorId, availableCopies);
         props.onEditBook(props.book.id, name, category, authorId, availableCopies);
         history.push("/books");
     }
+    
 
     return(
-        <form onSubmit={onFormSubmit}>
+        <form className="editForm" onSubmit={onFormSubmit}>
                 <label for="name">Book Name</label>
                 <input id="name" 
                 name="name" 
@@ -37,15 +51,18 @@ const EditBook = (props) => {
                 onChange={handleChange}/>
 
                 <label for="category">Book Category</label>
-                <input id="category" 
-                name="category" 
-                placeholder={props.book.category} 
-                onChange={handleChange}/>
+                <select name="category" id="category" onChange={handleChange}>
+                    <option value={props.book.category} disabled hidden selected>{props.book.category}</option>
+                    {
+                        Object.keys(Categories).map((key) => {
+                            return <option value={key}>{key}</option>
+                        })
+                    }
+                </select>
 
                 <label for="authorId">Book Author</label>
                 <input id="authorId" 
                 name="authorId" 
-                placeholder={props.book.authorId} 
                 onChange={handleChange}/>
 
                 <label for="availableCopies">Book Available Copies</label>

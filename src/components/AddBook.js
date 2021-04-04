@@ -1,6 +1,7 @@
 import { Component } from "react";
 import React from 'react';
 import BookService from "../repository/BookRepository";
+import '../style/AddBook.css'
 import {useHistory} from 'react-router-dom';
 
 
@@ -13,6 +14,16 @@ const AddBook = (props) => {
         authorId: "1",
         availableCopies: "3" 
     })
+
+    const Categories = {
+        THRILLER: "THRILLER",
+        DRAMA: "DRAMA",
+        NOVEL: "NOVEL", 
+        HISTORY: "HISTORY", 
+        FANTASY: "FANTASY", 
+        BIOGRAPHY: "BIOGRAPHY", 
+        CLASSICS: "CLASSICS"
+    }
 
     const handleChange = (e) => {
         console.log(e.target.value);
@@ -34,18 +45,19 @@ const AddBook = (props) => {
         history.push("/books");
     }
 
-
-    /*handleSubmit(){
-        BookService.addBook();
-
-    }*/
-
         return(
-            <form onSubmit={onFormSubmit}>
+            <form className="addForm" onSubmit={onFormSubmit}>
                 <label for="name">Book Name</label>
                 <input type="text" id="name" name="name" onChange={handleChange}/>
-                <label for="category">Book Category</label>
-                <input type="text" id="category" name="category" onChange={handleChange}/>
+                <label for="category1">Book Category</label>
+                <select name="category" id="category1" onChange={handleChange}>
+                    {
+                        Object.keys(Categories).map((key) => {
+                            return <option value={key}>{key}</option>
+                        })
+                    }
+                </select>
+
                 <label for="authorId">Book Author</label>
                 <input type="text" id="authorId" name="authorId" onChange={handleChange}/>
                 <label for="availableCopies">Book Available Copies</label>

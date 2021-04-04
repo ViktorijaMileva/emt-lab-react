@@ -31,3 +31,65 @@
      margin-top: 30px;
      margin-left: 10px;
  }
+
+ .editLink{
+  background-color: white;
+  color: black;
+  border: 2px solid green;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 50px;
+ }
+
+ .editLink:hover{
+  background-color: green;
+  color: white;
+ }
+
+ .deleteLink{
+  background-color: white;
+  color: black;
+  border: 2px solid green;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 50px;
+
+ }
+
+ .deleteLink:hover{
+   background-color: green;
+   color: white;
+ }
+
+ .pagination li{
+   display: inline-block;
+   padding: 10px;
+   border: solid black 1px;
+   cursor: pointer;
+ }
+
+ .pagination :hover{
+   background-color: black;
+   color: white;
+ }
+
+ .addBookLink{
+  background-color: white;
+  color: black;
+  border: 2px solid green;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+
+ }
+
+ .addBookLink:hover{
+   background-color: green;
+   color: white;
+ }

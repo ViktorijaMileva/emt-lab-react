@@ -20,8 +20,9 @@ class App extends React.Component {
     BookService.fetchBooks()
     .then((data) => {
       this.setState({
-        books: data.data
-      })
+        books: data.data}, () => {
+          console.log("finished");
+    })
     });
   }
 
@@ -51,6 +52,7 @@ class App extends React.Component {
       this.loadBooks();
     });
   }
+  
 
   deleteBook = (id) => {
     BookService.deleteBook(id)

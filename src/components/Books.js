@@ -2,26 +2,31 @@ import '../style/Books.css';
 import BookService from '../repository/BookRepository.js';
 import React from 'react';
 import {Link} from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 
 class Books extends React.Component {
 
     constructor(props) {
         super(props);
-       /* this.state = {
-            books: []
-        }; */
+        this.state = {
+            page: 0,
+            size: 5
+        }
+
+    }
+    handleClick = (data) => {
+        let selected = data.selected;
+        this.setState({
+            page: selected
+        })
     }
 
-/*    componentDidMount(){
-        BookService.fetchBooks()
-        .then(response => response.data)
-        .then(result => this.setState({books : result}))
-      
-    }
-*/
     render(){
 
         const books = this.props.books;
+        const offset = this.state.size * this.state.page; //0, 5
+        const nextPageOffset = offset + this.state.size; //5, 10
+        const pageCount = Math.ceil(this.props.books.length / this.state.size); //2
 
         return(
         
@@ -32,6 +37,8 @@ class Books extends React.Component {
               <th>Category</th>
               <th>Author</th>
               <th>Available Copies</th>
+              <th></th>
+              <th></th>
             </tr>
             
             {books.map(book => <tr>
@@ -40,15 +47,32 @@ class Books extends React.Component {
                 <td>{book.author.name}</td>
                 <td>{book.availableCopies}</td>
                 <td>
-                    <Link onClick={() => this.props.onEditBook(book.id)}
+                    <Link className="editLink" onClick={() => this.props.onEditBook(book.id)}
                       to={`/books/edit/${book.id}`} >Edit Book</Link>
                 </td>
                 <td>
-                    <Link onClick={() => this.props.onDeleteBook(book.id)}>Delete</Link>
+                    <Link className="deleteLink" onClick={() => this.props.onDeleteBook(book.id)}>Delete</Link>
                 </td>
-            </tr>)}
+            </tr>).filter((book, index) => {
+                    return index >= offset && index < nextPageOffset;
+        })
 
-            <Link to="/books/add">Add Book</Link>
+            }
+
+
+            <Link className="addBookLink" to="/books/add">Add Book</Link>
+
+            <ReactPaginate previousLabel={"back"}
+            nextLabel={"next"}
+            breakLabel={<a href="#">...</a>}
+            breakClassName={"break-me"}
+            pageClassName={"ml-1"}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handleClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"} />
 
             
               
@@ -62,5 +86,6 @@ class Books extends React.Component {
         )
     }
 
-}
+    }    
+
 export default Books;
